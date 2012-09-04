@@ -1,5 +1,86 @@
 # Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# The underscores (_) before a key indicates that the word is not used in the beginning of a sentence
+# and thus is not capitalized in most languages, but might be capitalized in some (e.g. the name of a month, a noun in German, etc.)
+# The _verb suffix represents an English word that is a verb, but at the same time a noun. This is usually not the case in other languages.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        twitter_token: "This Twitter account"
+  #  errors:
+  #    models:
+  #      user:
+  #        attributes:
+  #          email:
+  #            blank: "is required"
+
+  base_title: "Tag It"
+  home: "Home"
+  profile: "Profile"
+  setting: "Setting"
+  contact: "Contact"
+  about: "About"
+  news: "News"
+  help: "Help"
+  sign_up: "Sign up"
+  sign_in: "Sign in"
+  sign_out: "Sign out"
+  name: "Name"
+  username: "Username"
+  url: "URL"
+  email: "Email"
+  password: "Password"
+  confirm_password: "Confirm password"
+  operation_failed_message: "Operation failed with"
+  _error: "error"
+  welcome_message: "Welcome to TagIt!"
+  not_registered_message: "Not registered?"
+  invalid_login_message: "Invalid email/password combination"
+  edit_profile: "Edit profile"
+  update_verb: "Update"
+  confirmation: "Confirmation"
+  profile_updated_message: "Profile successfully updated"
+  deny_access_message: "You don't have access to this page"
+  user: "User"
+  delete: "Delete"
+  _delete: "delete"
+  confirm_delete_message: "Are you sure you want to delete this item?"
+  confirm_untag_all_message: "Are you sure you want to remove the '%{tag}' tag from all your posts? This will not delete the tagged posts."
+  user_deleted_message: "User deleted successfully"
+  user_not_deleted_message: "There was an error while trying to delete the user"
+  _post: "post"
+  post: "Post"
+  post_verb: "Post"
+  posted_message: "%{time} ago"
+  post_created_message: "Post successfully created"
+  new_post_message: "What's up?"
+  work_in_progress_message: "Work in progress"
+  following: "Following"
+  _following: "following"
+  follower: "Follower"
+  _follower: "follower"
+  follow: "Follow"
+  unfollow: "Unfollow"
+  description: "Description"
+  title: "Title"
+  more: "More"
+  tag: "Tag"
+  tag_list_placeholder: "Tags (separated by commas)"
+  tag_list_placeholder_short: "Tags"
+  text: "Text"
+  stream: "Stream"
+  search_verb: "Search"
+  record_not_found_message: "The record could not be found."
+  my_tags: "My tags"
+  other_tags: "Other tags"
+  expand_all: "Expand all"
+  collapse_all: "Collapse all"
+  post_failed_message: "There was an error while trying to save your post. Please try again."
+  cancel: "Cancel"
+  no_results_found_message: "Sorry, couldn't find anything."
+  alternate_sign_in_message: "or use"
+  connect_alternate_account_message: "Connect to"
+  connect_alternate_account_success_message: "%{provider} credentials were successfully received. Press 'Update' to save the changes."
+  disconnect_alternate_account_message: "Disconnect from"
