@@ -30,6 +30,7 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.2)
     arel (3.0.2)
+    bootstrap-sass (2.0.4.0)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -128,7 +129,7 @@ GEM
       rspec (~> 2.11.0)
     rubyzip (0.9.9)
     sass (3.2.1)
-    sass-rails (3.2.5)
+    sass-rails (3.2.4)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
@@ -169,6 +170,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  bootstrap-sass (= 2.0.4)
   capybara (= 1.1.2)
   coffee-rails (= 3.2.2)
   guard-rspec (= 0.5.5)
@@ -179,7 +181,7 @@ DEPENDENCIES
   rb-fchange (= 0.0.5)
   rb-notifu (= 0.0.4)
   rspec-rails (= 2.11.0)
-  sass-rails (= 3.2.5)
+  sass-rails (= 3.2.4)
   spork (= 0.9.0)
   sqlite3 (= 1.3.5)
   uglifier (= 1.2.3)
