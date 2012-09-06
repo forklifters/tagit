@@ -8,6 +8,7 @@ en:
   activerecord:
     attributes:
       user:
+        password_digest: "Password"
         twitter_token: "This Twitter account"
   #  errors:
   #    models:
