@@ -1,0 +1,1 @@
+<div class="user">  <%= gravatar_for user %>  <%= link_to user.name, user %>    <% if signed_in? && current_user.admin? && !user.admin? %>  <%= link_to raw("&times;"), user, method: "delete", confirm: t(:confirm_delete_message), title: "#{t(:delete)} #{user.name}?", class: "close" %>  <% end %></div>
