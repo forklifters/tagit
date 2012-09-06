@@ -1,2 +1,11 @@
 <% provide(:title, @user.name) %>
 <%= render @user %>
+<div class="span8">
+  <% if @user.posts.any? %>
+    <h3>(<%= pluralize(@user.posts.count, t(:post)) %>)</h3>
+    <ol class="posts">
+      <%= render @posts %>
+    </ol>
+    <%= will_paginate @posts %>
+  <% end %>
+</div>

@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   has_secure_password
+  has_many :posts, dependent: :destroy
+  
+  default_scope order: 'users.created_at DESC'  
   
   before_save { self.email.downcase! }
   before_save :create_remember_token
