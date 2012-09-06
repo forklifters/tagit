@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
   validates :password_confirmation,
     presence: true
   
+  def self.per_page
+    10
+  end
 private
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64

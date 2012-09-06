@@ -184,6 +184,17 @@ input, textarea, select, .uneditable-input
   }
 }
 
-.user
+.post_item
 {
+  padding-top: 10px;
+  
+  & > .post
+  {
+    border-top: 1px solid $grayLighter;
+    
+    & > .timestamp
+    {
+      color: $grayLight;
+    }
+  }
 }

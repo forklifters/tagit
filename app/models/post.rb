@@ -10,4 +10,8 @@ class Post < ActiveRecord::Base
     :length => { :maximum => 10000 }
   validates :user_id,
     :presence => true
+  
+  def self.per_page
+    10
+  end
 end

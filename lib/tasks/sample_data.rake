@@ -19,5 +19,11 @@ namespace :db do
         password_confirmation: password
       )
     end
+    
+    users = [User.first] + User.all(limit: 2)
+    33.times do
+      content = Faker::Lorem.sentence(5)
+      users.each { |user| user.posts.create!(content: content) }
+    end
   end
 end
