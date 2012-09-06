@@ -1,6 +1,9 @@
 TagitRails::Application.routes.draw do
+  get "users/new"
+  
   root to: "pages#home"
-  match "/home", to: "pages/home"
+  match "/home", to: "pages#home"
+  match "/signup",  to: "users#new"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
