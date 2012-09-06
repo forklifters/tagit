@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="icon" type="image/png" href="/images/logo.png" />
-    
     <title><%= full_title(yield(:title)) %></title>
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
@@ -13,24 +11,14 @@
   </head>
   
   <body>
-    <header class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <!--<img src="/images/logo.png" />-->
-          <%= link_to t(:base_title), root_path, id: "logo" %>
-          
-          <nav>
-            <ul class="nav pull-right">
-              <li><%= link_to t(:home), root_path %></li>
-              <li><%= link_to t(:sign_in), "#" %></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
-    
+    <%= render "layouts/header" %>
     <div class="container">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
       <%= yield %>
+      <%= render "layouts/footer" %>
+      <%= debug(params) if Rails.env.development? %>
     </div>
   </body>
 </html>
