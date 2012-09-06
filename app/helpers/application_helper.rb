@@ -7,4 +7,8 @@ module ApplicationHelper
       "#{t(:base_title)} | #{page_title}"
     end
   end
+  
+  def active(page)
+    "active" if current_page?(page)
+  end
 end
