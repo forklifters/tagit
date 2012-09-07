@@ -1,1 +1,1 @@
-<% provide(:title, t(:user).pluralize) %><%= render "users/search" %><%= render "users/users", users: @users %>
+<% provide(:title, t(:user).pluralize) %><% if @users.any? %>  <%= render "users/search" %>  <%= render "users/users", users: @users %><% else %>  <%= t(:no_users_message) %><% end %>

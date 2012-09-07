@@ -47,15 +47,16 @@ class UsersController < ApplicationController
   end
   
   def following
+    @title = t(:following)
     show_follow(:following)
   end
 
   def followers
+    @title = t(:follower).pluralize
     show_follow(:followers)
   end
 
   def show_follow(action)
-    @title = t[action.to_s]
     @user = User.find(params[:id])
     @users = @user.send(action).paginate(page: params[:page])
     render "users/show_relationships"

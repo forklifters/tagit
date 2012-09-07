@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :username
+  
   attr_accessible :name, :username, :email, :password, :password_confirmation
   
   has_secure_password
@@ -39,7 +42,7 @@ class User < ActiveRecord::Base
   end
   
   def stream
-    Post.where("user_id = ?", id) # TODO
+    Post.from_user_stream(self).order("created_at DESC")
   end
   
   def following?(other_user)
@@ -53,6 +56,16 @@ class User < ActiveRecord::Base
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
   end
+  
+  def self.from_user_stream(user) # Select [posts] from [this user + followed users + tagged posts] that have [tags this user has not blocked]
+    Post
+      .select('DISTINCT "posts".id, "posts".*')
+      .joins('LEFT JOIN "relationships" ON "posts".user_id = "relationships".followed_id')
+      .joins('LEFT JOIN "post_tags" ON "posts".id = "post_tags".post_id')
+      .joins('LEFT JOIN "user_tags" ON "post_tags".tag_id = "user_tags".tag_id')
+      .where('("posts".user_id = ? OR "relationships".follower_id = ? OR "post_tags".user_id = ?) AND "user_tags".tag_id IS NULL', user.id, user.id, user.id)
+  end
+  
 private
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64
