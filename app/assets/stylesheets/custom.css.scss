@@ -92,33 +92,6 @@ p
   }
 }
 
-aside
-{
-  section
-  {
-    padding: 10px 0;
-    border-top: 1px solid $grayLighter;
-    &:first-child
-    {
-      border: 0;
-      padding-top: 0;
-    }
-    span
-    {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1
-    {
-      font-size: 1.6em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-    }
-  }
-}
-
 .gravatar
 {
   float: left;
@@ -137,8 +110,8 @@ input, textarea, select, .uneditable-input
   border: 1px solid #bbb;
   width: 100%;
   padding: 10px;
+  margin-bottom: 4px;
   height: auto;
-  margin-bottom: 15px;
   @include box_sizing;
 }
 
@@ -168,27 +141,20 @@ input, textarea, select, .uneditable-input
   @include box_sizing;
 }
 
-.users
+.user
 {
-  list-style: none;
-  margin: 0;
-  li
+  & > .user_inner
   {
-    overflow: auto;
-    padding: 10px 0;
+    margin-bottom: 10px;
     border-top: 1px solid $grayLighter;
-    &:last-child
-    {
-      border-bottom: 1px solid $grayLighter;
-    }
   }
 }
 
-.post_item
+.post
 {
-  padding-top: 10px;
+  margin-bottom: 10px;
   
-  & > .post
+  & > .post_inner
   {
     border-top: 1px solid $grayLighter;
     

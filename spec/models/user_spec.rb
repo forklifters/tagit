@@ -13,6 +13,7 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:posts) }
+  it { should respond_to(:stream) }
   it { should_not be_admin }
 
   it { should be_valid }
@@ -127,6 +128,16 @@ describe User do
 
     it "should have the right posts in the right order" do
       @user.posts.should == [newer_post, older_post]
+    end
+    
+    describe "status" do
+      let(:unfollowed_post) do
+        FactoryGirl.create(:post, user: FactoryGirl.create(:user))
+      end
+
+      its(:feed) { should include(newer_post) }
+      its(:feed) { should include(older_post) }
+      its(:feed) { should_not include(unfollowed_post) }
     end
     
     it "should destroy associated posts" do

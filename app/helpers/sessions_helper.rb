@@ -13,7 +13,7 @@ module SessionsHelper
     !current_user.nil?
   end
   
-  def signed_in_user
+  def ensure_signed_in
     unless signed_in?
       store_location
       redirect_to signin_url, notice: t(:deny_access_message)
@@ -26,11 +26,11 @@ module SessionsHelper
   def current_user=(user)
     @current_user = user
   end
-  def is_current_user?(user)
+  def current_user?(user)
     user == current_user
   end
   
-  def redirect_back_or(default)
+  def redirect_back_or_to(default)
     redirect_to(session[:return_to] || default)
     session.delete(:return_to)
   end

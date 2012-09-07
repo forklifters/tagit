@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, username, :email, :password, :password_confirmation
   has_secure_password
   has_many :posts, dependent: :destroy
   
@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
   
   validates :name,
     length: { maximum: 60 }
-  # validates :username,
-  #   presence: true,
-	# 	length: { within: 3..30 },
-  #   format: { with: USERNAME_REGEX },
-  #   uniqueness: { case_sensitive: false }
+  validates :username,
+    presence: true,
+		length: { within: 3..30 },
+    format: { with: USERNAME_REGEX },
+    uniqueness: { case_sensitive: false }
   validates :email,
 		presence: true,
     length: { maximum: 254 },
@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
   
   def self.per_page
     10
+  end
+  
+  def stream
+    Post.where("user_id = ?", id) # TODO
   end
 private
   def create_remember_token

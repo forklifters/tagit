@@ -8,7 +8,9 @@
       <%= label_tag :password %>
       <%= password_field_tag :password %>
       
-      <div class="actions"><%= submit_tag t(:sign_in), class: "btn btn-large btn-primary" %></div>
+      <div class="actions">
+        <%= submit_tag t(:sign_in), class: "btn btn-large btn-primary" %>
+      </div>
     <% end %>
 
     <p><%= t(:not_registered_message) %> <%= link_to t(:sign_up), signup_path %></p>

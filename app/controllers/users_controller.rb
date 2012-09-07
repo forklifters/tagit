@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:edit, :update]
-  before_filter :correct_user, only: [:edit, :update]
-  before_filter :admin_user, only: :destroy
+  before_filter :ensure_signed_in, only: [:edit, :update]
+  before_filter :authorize_edit, only: [:edit, :update]
+  before_filter :authorize_destroy, only: :destroy
+  
+  respond_to :html, :js
   
   def new
     @user = User.new
@@ -19,12 +21,16 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.paginate(page: params[:page])
+    query = "#{params[:search]}%"
+    @users = User.where("LOWER(username) LIKE LOWER(?) OR LOWER(name) LIKE LOWER(?)", query, query).order("created_at DESC").paginate(:page => params[:page])
+    if request.xhr?
+     render "users/search", :users => @users
+    end
   end
   
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.paginate(page: params[:page])
+    @stream = @user.stream.paginate(page: params[:page])
   end
   
   def edit
@@ -47,15 +53,16 @@ class UsersController < ApplicationController
   end
   
 private
-  def correct_user
+  def authorize_edit
     @user = User.find(params[:id])
-    redirect_to(root_path) unless is_current_user?(@user)
+    redirect_to root_path unless current_user?(@user)
   end
   
-  def admin_user
-    unless current_user.admin?
-      flash[:notice] = t(:deny_access_message)
-      redirect_to(root_path)
+  def authorize_admin
+    @user = User.find(params[:id])
+    unless current_user.admin? && !@user.admin?
+      flash[:error] = t(:deny_access_message)
+      redirect_to root_path
     end
   end
 end
