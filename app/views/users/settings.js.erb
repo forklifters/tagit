@@ -1,0 +1,5 @@
+<% if !@collapse_post.nil? && !@post.nil? %>
+  var post_content = $('#post_<%= @post.id %>').find('.content');
+  post_content.html('<%= format_post(@post.content, @collapse_post) %>');
+  post_content.children().hide().animate({ height: 'toggle' }, constants.ANIMATION_DURATION);
+<% end %>

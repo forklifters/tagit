@@ -3,18 +3,18 @@ namespace :db do
   task populate: :environment do
     admin = User.create!(
       name: "Vladimir Sabev",
+      username: "vdsabev",
       email: "vdsabev@gmail.com",
       password: "tester",
       password_confirmation: "tester")
     admin.toggle!(:admin)
     
     99.times do |n|
-      name = Faker::Name.name
-      email = "example-#{n+1}@railstutorial.org"
-      password = "password"
+      password = "tester"
       User.create!(
-        name: name,
-        email: email,
+        name: Faker::Name.name,
+        username: "example#{n+1}",
+        email: "example-#{n+1}@railstutorial.org",
         password: password,
         password_confirmation: password
       )

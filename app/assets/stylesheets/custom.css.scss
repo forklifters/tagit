@@ -66,6 +66,16 @@ p
   line-height: 1.7em;
 }
 
+a
+{
+  color: #09c;
+  &:hover
+  {
+    color: #069;
+    text-decoration: none;
+  }
+}
+
 #logo
 {
   float: left;
@@ -95,7 +105,7 @@ p
 .gravatar
 {
   float: left;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 @mixin box_sizing
@@ -113,6 +123,11 @@ input, textarea, select, .uneditable-input
   margin-bottom: 4px;
   height: auto;
   @include box_sizing;
+  
+  &.span6
+  {
+    width: 468px;
+  }
 }
 
 #error_explanation
@@ -155,12 +170,17 @@ input, textarea, select, .uneditable-input
   margin-bottom: 10px;
   
   & > .post_inner
-  {
+  { 
     border-top: 1px solid $grayLighter;
     
     & > .timestamp
     {
       color: $grayLight;
+    }
+    
+    & > .title
+    {
+      font-weight: bold;
     }
   }
 }

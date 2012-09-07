@@ -9,14 +9,13 @@ en:
     attributes:
       user:
         password_digest: "Password"
-        twitter_token: "This Twitter account"
-  #  errors:
-  #    models:
-  #      user:
-  #        attributes:
-  #          email:
-  #            blank: "is required"
-
+        # twitter_token: "This Twitter account"
+  errors:
+    models:
+      user:
+        attributes:
+          email:
+            blank: "is required"
   base_title: "Tag It"
   home: "Home"
   profile: "Profile"

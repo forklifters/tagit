@@ -1,0 +1,3 @@
+<% unless @post_id.nil? %>
+  $('#post_<%= @post_id %>').animate({ height: 'toggle' }, constants.ANIMATION_DURATION, function () { $(this).remove(); });
+<% end %>

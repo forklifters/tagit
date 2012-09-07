@@ -16,7 +16,8 @@ module SessionsHelper
   def ensure_signed_in
     unless signed_in?
       store_location
-      redirect_to signin_url, notice: t(:deny_access_message)
+      flash[:notice] = t(:deny_access_message)
+      redirect_to signin_url
     end
   end
   

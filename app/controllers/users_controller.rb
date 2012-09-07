@@ -46,6 +46,23 @@ class UsersController < ApplicationController
     end
   end
   
+  def settings
+    # if !params[:collapse_post].nil? && !params[:post_id].nil?
+      # @collapse_post = (params[:collapse_post] == "true")
+      # post_id_int = params[:post_id].to_i
+      # @post = Post.find_by_id(post_id_int)
+      # unless @post.nil?
+        # current_user.settings.collapsed_posts = [] if current_user.settings.collapsed_posts.nil?
+        # if @collapse_post
+          # current_user.settings.collapsed_posts += [post_id_int] unless current_user.settings.collapsed_posts.include?(post_id_int)
+        # else
+          # current_user.settings.collapsed_posts -= [post_id_int]
+        # end
+      # end
+      # respond_with @collapse_post, @post
+    # end
+  end
+  
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = t(:user_deleted_message)
@@ -58,7 +75,7 @@ private
     redirect_to root_path unless current_user?(@user)
   end
   
-  def authorize_admin
+  def authorize_destroy
     @user = User.find(params[:id])
     unless current_user.admin? && !@user.admin?
       flash[:error] = t(:deny_access_message)

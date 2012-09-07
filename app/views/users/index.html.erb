@@ -1,1 +1,1 @@
-<% provide(:title, t(:user).pluralize) %><%= will_paginate %><div class="users">    <%= render @users %></div><%= will_paginate %>
+<% provide(:title, t(:user).pluralize) %><%= render "users/search" %><%= render "users/users", :users => @users %>
