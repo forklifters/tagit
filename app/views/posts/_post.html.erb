@@ -1,5 +1,5 @@
 <div id="post_<%= post.id %>" class="post">
-  <%= link_to gravatar_for(post.user, size: 55), post.user %>
+  <%= link_to gravatar_for(post.user, size: 38), post.user %>
   
   <div class="post_inner">
   <% if signed_in? && current_user?(post.user) %>
@@ -20,8 +20,9 @@
     <% end %>
     
     <div class="title"><%= post.title %></div>
-    
-    <div class="content"><%= format_post(post.content) %></div>
   </div>
+  
   <div class="clear"></div>
+  
+  <div class="content"><%= format_post(post.content) %></div>
 </div>

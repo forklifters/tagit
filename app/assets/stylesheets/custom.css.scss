@@ -175,7 +175,7 @@ input, textarea, select, .uneditable-input
   margin-bottom: 10px;
   
   & > .post_inner
-  { 
+  {
     border-top: 1px solid $grayLighter;
     
     & > .timestamp
@@ -187,5 +187,10 @@ input, textarea, select, .uneditable-input
     {
       font-weight: bold;
     }
+  }
+  
+  & > .content
+  {
+      margin-top: 5px;
   }
 }
