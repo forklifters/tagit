@@ -7,7 +7,7 @@ class Tag < ActiveRecord::Base
   has_many :post_tags, :class_name => "PostTag", :foreign_key => "tag_id", :dependent => :destroy
   has_many :posts, :through => :post_tags, :source => :post
   
-  has_many :user_tags, :class_name => "UserTag", :foreign_key => "tag_id", :dependent => :destroy
+  # has_many :user_tags, :class_name => "UserTag", :foreign_key => "tag_id", :dependent => :destroy
   
   validates :name,
     :presence => true,

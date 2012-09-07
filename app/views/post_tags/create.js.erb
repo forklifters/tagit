@@ -1,0 +1,3 @@
+<% unless @post.nil? %>
+  $('#post_<%= @post.id %>_tags').html('<%= escape_javascript(render :partial => "post_tags/post_tag", :collection => @post.tags_for_user(current_user)) %>');
+<% end %>

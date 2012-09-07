@@ -1,0 +1,30 @@
+<% unless post_tag.nil? %>
+  <div class="<%= "foreign_" if post_tag.belongs_to_current_user.to_s == "0" %>tag">
+    <div class="pull-right">
+      <div class="pull-left tag_count">
+        <% tag_count = PostTag.find_all_by_tag_id_and_post_id(post_tag.tag.id, post_tag.post.id).length %>
+        <% if tag_count > 1 %>
+        (<%= tag_count %>)
+        <% end %>
+      </div>
+      
+      <% if signed_in? %>
+      <div class="pull-left">
+        <% if post_tag.belongs_to_current_user.to_s == "1" %>
+        <%= link_to raw('<i class="icon-minus"></i>'), current_user.post_tags.find_by_post_id_and_tag_id(post_tag.post_id, post_tag.tag_id), method: :delete, remote: true %>
+        <% else %>
+        <%= link_to raw('<i class="icon-plus"></i>'), post_tags_path(post_id: post_tag.post.id, tag_id: post_tag.tag.id), method: :post, remote: true %>
+        <% end %>
+      </div>
+      <% end %>
+      
+      <div class="clear"></div>
+    </div>
+  
+    <div class="pull-left tag_name">
+      <%= link_to post_tag.tag.name, post_tag.tag %>
+    </div>
+    
+    <div class="clear"></div>
+  </div>
+<% end %>

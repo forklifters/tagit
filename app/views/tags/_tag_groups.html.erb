@@ -1,0 +1,23 @@
+<div class="user_tags">
+  <div class="tag_group" onclick="utilities.toggleCollapsed(this, 'my_tags');">
+    <div class="left"><%= t(:my_tags) %></div>
+    <div class="expand_button right"></div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="my_tags" class="tag_group_list"><!--style="display: none"-->
+    <%= render :partial => "tags/tag", :collection => current_user.tags_from_posts, :locals => { :show_checkboxes => true, :show_count => true } %>
+  </div>
+  <div class="clear"></div>
+
+  <div class="tag_group" onclick="utilities.toggleCollapsed(this, 'other_tags');">
+    <div class="left"><%= t(:other_tags) %></div>
+    <div class="expand_button right"></div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="other_tags" class="tag_group_list"><!--style="display: none"-->
+    <%= render :partial => "tags/tag", :collection => current_user.tags_from_followed_users - current_user.tags_from_posts, :locals => { :show_checkboxes => true, :show_count => true } %>
+  </div>
+  <div class="clear"></div>
+</div>

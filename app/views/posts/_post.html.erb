@@ -1,28 +1,55 @@
 <div id="post_<%= post.id %>" class="post">
   <%= link_to gravatar_for(post.user, size: 38), post.user %>
-  
+
   <div class="post_inner">
-  <% if signed_in? && current_user?(post.user) %>
-    <%= link_to raw('<i class="icon-remove"></i>'), post, class: "pull-right", remote: true, method: "delete", confirm: t(:confirm_delete_message) %>
-    <%= link_to raw('<i class="icon-pencil"></i>'), edit_post_path(post), class: "pull-right", remote: true %>
-  <% end %>
+    <div>
+      <% if signed_in? && current_user?(post.user) %>
+      <%= link_to raw('<i class="icon-remove"></i>'), post, class: "pull-right", remote: true, method: "delete", confirm: t(:confirm_delete_message) %>
+      <%= link_to raw('<i class="icon-pencil"></i>'), edit_post_path(post), class: "pull-right", remote: true %>
+      <% end %>
+
+      <span>
+        <a href="<%= user_path(post.user) %>">
+          <span class="user_username"><%= post.user.username %></span>
+        </a>
+      </span>
+
+      <%= link_to(post, title: post.created_at.to_s(:short), class: "timestamp") do %>
+        <time class="timeago" datetime="<%= post.created_at.iso8601 %>">
+          <%= t(:posted_message) % { time: time_ago_in_words(post.created_at) } %>
+        </time>
+      <% end %>
+    </div>
     
-    <span>
-      <a href="<%= user_path(post.user) %>">
-        <span class="user_username"><%= post.user.username %></span>
-      </a>
-    </span>
-    
-    <%= link_to(post, title: post.created_at.to_s(:short), class: "timestamp") do %>
-      <time class="timeago" datetime="<%= post.created_at.iso8601 %>">
-        <%= t(:posted_message) % { time: time_ago_in_words(post.created_at) } %>
-      </time>
-    <% end %>
-    
-    <div class="title"><%= post.title %></div>
+    <div>
+      <span class="title"><%= post.title %></span>
+
+      <% if signed_in? %>
+      <div class="pull-right add_tags">
+        <div class="pull-left tag_list">
+          <input id="post_<%= post.id %>_tag_list_text_box" class="pull-left" type="text" autocomplete="off" onkeyup="events.tagListTextBoxKeyUp(event, '<%= tags_path %>', <%= post.id %>);" placeholder="<%= t(:tag_list_placeholder_short) %>" />
+        </div>
+
+        <div class="pull-left">
+          <i class="icon-plus" id="post_<%= post.id %>_show_add_tags" onclick="utilities.addTags(this, <%= post.id %>, true);"></i>
+          <%= link_to raw('<i class="icon-plus"></i>'), post_tags_path(post_id: post.id, add_tags: true), method: "post", remote: true, id: "post_#{post.id}_add_tags", style: "display: none", onclick: "utilities.addTags(this, #{post.id}, false);" %>
+        </div>
+
+        <div class="clear"></div>
+      </div>
+      <% end %>
+
+      <div id="post_<%= post.id %>_tags" class="pull-right tags">
+        <% if signed_in? %>
+        <%= render partial: "post_tags/post_tag", collection: post.tags_for_user(current_user) %>
+        <% else %>
+        <%= render partial: "post_tags/post_tag", collection: post.tags_for_author %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  
+
   <div class="clear"></div>
-  
+
   <div class="content"><%= format_post(post.content) %></div>
 </div>

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       flash[:success] = t(:welcome_message)
-      redirect_to @user
+      redirect_to root_path
     else
       render "users/new"
     end
@@ -63,20 +63,20 @@ class UsersController < ApplicationController
   end
   
   def settings
-    # if !params[:collapse_post].nil? && !params[:post_id].nil?
-      # @collapse_post = (params[:collapse_post] == "true")
-      # post_id_int = params[:post_id].to_i
-      # @post = Post.find_by_id(post_id_int)
-      # unless @post.nil?
-        # current_user.settings.collapsed_posts = [] if current_user.settings.collapsed_posts.nil?
-        # if @collapse_post
-          # current_user.settings.collapsed_posts += [post_id_int] unless current_user.settings.collapsed_posts.include?(post_id_int)
-        # else
-          # current_user.settings.collapsed_posts -= [post_id_int]
-        # end
-      # end
-      # respond_with @collapse_post, @post
-    # end
+    if !params[:collapse_post].nil? && !params[:post_id].nil?
+      @collapse_post = (params[:collapse_post] == "true")
+      post_id_int = params[:post_id].to_i
+      @post = Post.find_by_id(post_id_int)
+      unless @post.nil?
+        current_user.settings.collapsed_posts = [] if current_user.settings.collapsed_posts.nil?
+        if @collapse_post
+          current_user.settings.collapsed_posts += [post_id_int] unless current_user.settings.collapsed_posts.include?(post_id_int)
+        else
+          current_user.settings.collapsed_posts -= [post_id_int]
+        end
+      end
+      respond_with @collapse_post, @post
+    end
   end
   
   def destroy

@@ -1,6 +1,6 @@
 @import "bootstrap";
 
-$grayMediumLight: #eaeaea;
+$grayMedium: #eaeaea; //#dfdfef;
 
 @mixin boxSizing
 {
@@ -45,7 +45,6 @@ textarea
 .center
 {
   text-align: center;
-  
   h1
   {
     margin-bottom: 10px;
@@ -95,12 +94,10 @@ a
 {
   float: left;
   margin-top: 7px;
-  
   img
   {
     height: 25px;
   }
-  
   .logo_text
   {
     color: white;
@@ -136,7 +133,6 @@ input, textarea, select, .uneditable-input
   margin-bottom: 4px;
   height: auto;
   @include boxSizing;
-  
   &.span6
   {
     width: 468px;
@@ -170,7 +166,7 @@ input, textarea, select, .uneditable-input
   float: left;
   width: 100%;
   margin-top: 45px;
-  background: $grayMediumLight;
+  background: $grayMedium;
   @include boxSizing;
 }
 
@@ -178,11 +174,9 @@ $separatorSize: 2px;
 .user
 {
   margin-bottom: 10px;
-  
   & > .user_inner
   {
     border-top: $separatorSize solid $grayLighter;
-    
     .gravatar
     {
       margin-top: -$separatorSize;
@@ -193,44 +187,75 @@ $separatorSize: 2px;
 .post
 {
   margin-bottom: 10px;
-  
   & > .post_inner
   {
     border-top: $separatorSize solid $grayLighter;
-    
-    & > .timestamp
+    .timestamp
     {
       color: $grayLight;
     }
-    
-    & > .title
+    .title
     {
       font-weight: bold;
+    }
+    .add_tags
+    {
+      .tag_list 
+      {
+        & > input
+        {
+          display: none;
+          margin: 0;
+        }
+      }
     }
   }
   
   & > .content
   {
-      margin-top: 5px;
+    margin-top: 5px;
+    & > .video
+    {
+      position: relative;
+      max-width: 480px;
       
-      & > .video
+      $play_video_size: 77px;
+      .play_video
       {
-        position: relative;
-        max-width: 480px;
-        
-        $play_video_size: 77px;
-        .play_video
-        {
-          background: url(/assets/play-video.png) no-repeat;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          margin-left: -$play_video_size / 2;
-          margin-top: -$play_video_size / 2;
-          width: $play_video_size;
-          height: $play_video_size;
-          opacity: 0.75;
-        }
+        background: url(/assets/play-video.png) no-repeat;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -$play_video_size / 2;
+        margin-top: -$play_video_size / 2;
+        width: $play_video_size;
+        height: $play_video_size;
+        opacity: 0.75;
       }
+    }
   }
+}
+
+.tag
+{
+  float: left;
+  background: $grayMedium;
+  padding: 0 4px;
+  margin-right: 4px;
+  .tag_name
+  {
+    margin-right: 2px;
+  }
+  .tag_count
+  {
+    color: #09c;
+    font-size: smaller;
+    margin-right: 2px;
+  }
+}
+
+.foreign_tag
+{
+  @extend .tag;
+  background: lighten($grayMedium, 5%);
 }

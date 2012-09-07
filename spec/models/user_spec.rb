@@ -142,10 +142,21 @@ describe User do
       let(:unfollowed_post) do
         FactoryGirl.create(:post, user: FactoryGirl.create(:user))
       end
+      let(:followed_user) { FactoryGirl.create(:user) }
 
-      its(:feed) { should include(newer_post) }
-      its(:feed) { should include(older_post) }
-      its(:feed) { should_not include(unfollowed_post) }
+      before do
+        @user.follow!(followed_user)
+        3.times { followed_user.posts.create!(content: "Lorem ipsum") }
+      end
+
+      its(:stream) { should include(newer_post) }
+      its(:stream) { should include(older_post) }
+      its(:stream) { should_not include(unfollowed_post) }
+      its(:stream) do
+        followed_user.posts.each do |post|
+          should include(post)
+        end
+      end
     end
     
     it "should destroy associated posts" do

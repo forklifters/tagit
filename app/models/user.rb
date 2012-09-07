@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
+  attr_accessible :name, :username, :email, :password, :password_confirmation
+
   extend FriendlyId
   friendly_id :username
-  
-  attr_accessible :name, :username, :email, :password, :password_confirmation
-  
+  has_settings
   has_secure_password
   
   has_many :posts, dependent: :destroy
@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   
   has_many :reverse_relationships, :class_name => "Relationship", :foreign_key => "followed_id", :dependent => :destroy
   has_many :followers, :through => :reverse_relationships, :source => :follower
+  
+  has_many :post_tags, :class_name => "PostTag", :foreign_key => "user_id", :dependent => :destroy
   
   default_scope order: "users.created_at DESC"
   
@@ -41,10 +43,6 @@ class User < ActiveRecord::Base
     10
   end
   
-  def stream
-    Post.from_user_stream(self).order("created_at DESC")
-  end
-  
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id)
   end
@@ -57,13 +55,20 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id).destroy
   end
   
-  def self.from_user_stream(user) # Select [posts] from [this user + followed users + tagged posts] that have [tags this user has not blocked]
-    Post
-      .select('DISTINCT "posts".id, "posts".*')
-      .joins('LEFT JOIN "relationships" ON "posts".user_id = "relationships".followed_id')
-      .joins('LEFT JOIN "post_tags" ON "posts".id = "post_tags".post_id')
-      .joins('LEFT JOIN "user_tags" ON "post_tags".tag_id = "user_tags".tag_id')
-      .where('("posts".user_id = ? OR "relationships".follower_id = ? OR "post_tags".user_id = ?) AND "user_tags".tag_id IS NULL', user.id, user.id, user.id)
+  def posts_from_followed_users
+    Post.from_followed_users(self)
+  end
+  
+  def stream
+    Post.from_user_stream(self).order("created_at DESC")
+  end
+  
+  def tags_from_posts
+    post_tags.map(&:tag).uniq.sort_by{ |tag| tag.name.downcase }
+  end
+  
+  def tags_from_followed_users
+    stream.map{ |post| post.post_tags.where(:user_id => following).map(&:tag) }.flatten.uniq.sort_by{ |tag| tag.name.downcase }
   end
   
 private
