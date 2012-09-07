@@ -6,9 +6,9 @@ class PostTag < ActiveRecord::Base
   belongs_to :user
   
   validates :post_id,
-    :presence => true
+    presence: true
   validates :tag_id,
-    :presence => true
+    presence: true
   validates :user_id,
-    :presence => true
+    presence: true
 end

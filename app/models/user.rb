@@ -8,13 +8,13 @@ class User < ActiveRecord::Base
   
   has_many :posts, dependent: :destroy
   
-  has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
-  has_many :following, :through => :relationships, :source => :followed
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :following, through: :relationships, source: :followed
   
-  has_many :reverse_relationships, :class_name => "Relationship", :foreign_key => "followed_id", :dependent => :destroy
-  has_many :followers, :through => :reverse_relationships, :source => :follower
+  has_many :reverse_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
   
-  has_many :post_tags, :class_name => "PostTag", :foreign_key => "user_id", :dependent => :destroy
+  has_many :post_tags, class_name: "PostTag", foreign_key: "user_id", dependent: :destroy
   
   default_scope order: "users.created_at DESC"
   
@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
   end
   
   def tags_from_followed_users
-    stream.map{ |post| post.post_tags.where(:user_id => following).map(&:tag) }.flatten.uniq.sort_by{ |tag| tag.name.downcase }
+    stream.map{ |post| post.post_tags.where(user_id: following).map(&:tag) }.flatten.uniq.sort_by{ |tag| tag.name.downcase }
   end
   
 private

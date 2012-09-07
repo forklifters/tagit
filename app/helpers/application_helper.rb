@@ -1,5 +1,4 @@
 module ApplicationHelper
-  # Returns the full title on a per-page basis.
   def full_title(page_title)
     if page_title.empty?
       t(:base_title)
@@ -10,5 +9,11 @@ module ApplicationHelper
   
   def active(page)
     "active" if current_page?(page)
+  end
+  
+  def pageless(total_pages, url = nil, target = nil, container = nil)
+    opts = { totalPages: total_pages, url: url, loader: "#" + target }
+    container && opts[:container] ||= container
+    javascript_tag("$('##{target}').pageless(#{opts.to_json});")
   end
 end

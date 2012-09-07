@@ -10,16 +10,16 @@ class TagsController < ApplicationController
       @tags = Tag.select('name').where('LOWER(name) LIKE LOWER(?) AND id NOT IN (SELECT "post_tags".tag_id FROM "post_tags" WHERE "post_tags".post_id = ?)', name, post_id)
     end
     if request.xhr?
-      render :partial => 'tags/autocomplete_tag', :collection => @tags.take(5), :post_id => params[:post_id]
+      render partial: 'tags/autocomplete_tag', collection: @tags.take(5), post_id: params[:post_id]
     end
   end
   
   def show
     @tag = Tag.find_by_slug(params[:id])
-    @tag_posts = Post.where(:id => @tag.posts.uniq).paginate(:page => params[:page]) unless @tag.nil?
+    @tag_posts = Post.where(id: @tag.posts.uniq).paginate(page: params[:page]) unless @tag.nil?
     flash[:error] = t(:record_not_found_message) if @tag.nil?
     if request.xhr?
-      render :partial => 'posts/post', :collection => @tag_posts
+      render partial: 'posts/post', collection: @tag_posts
     end
   end
   

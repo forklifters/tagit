@@ -25,7 +25,7 @@
       <span class="title"><%= post.title %></span>
 
       <% if signed_in? %>
-      <div class="pull-right add_tags">
+      <div class="pull-right">
         <div class="pull-left tag_list">
           <input id="post_<%= post.id %>_tag_list_text_box" class="pull-left" type="text" autocomplete="off" onkeyup="events.tagListTextBoxKeyUp(event, '<%= tags_path %>', <%= post.id %>);" placeholder="<%= t(:tag_list_placeholder_short) %>" />
         </div>

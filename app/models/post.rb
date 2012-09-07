@@ -2,8 +2,8 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :content, :tag_list
   
   belongs_to :user
-  has_many :post_tags, :class_name => 'PostTag', :foreign_key => 'post_id', :dependent => :destroy
-  has_many :tags, :through => :post_tags, :source => :tag
+  has_many :post_tags, class_name: 'PostTag', foreign_key: 'post_id', dependent: :destroy
+  has_many :tags, through: :post_tags, source: :tag
   
   default_scope order: "posts.created_at DESC"  
   
@@ -34,7 +34,7 @@ class Post < ActiveRecord::Base
   end
   
   def tag!(tag, user)
-    post_tags.create!(:tag_id => tag.id, :user_id => user.id)
+    post_tags.create!(tag_id: tag.id, user_id: user.id)
   end
   
   def untag!(tag, user)
@@ -71,7 +71,7 @@ class Post < ActiveRecord::Base
   end
   
   def self.from_followed_users(user)      
-    Post.where(:user_id => user.following_ids)
+    Post.where(user_id: user.following_ids)
   end
   
   def self.from_user_stream(user) # Select [posts] from [this user + followed users + tagged posts] that have [tags this user has not blocked]

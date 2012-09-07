@@ -1,12 +1,12 @@
 <% unless @tag.nil? %>
 <div id="stream" class="main_bar">
   <div id="tag">
-    <%= render "tags/tag", :tag => @tag, :show_untag_all => true %>
+    <%= render "tags/tag", tag: @tag, show_untag_all: true %>
     <div class="clear"></div>
   </div>
   
   <div class="posts">
-    <%= render "posts/posts", :posts => @tag_posts, :path => tag_path(@tag) %>
+    <%= render "posts/posts", posts: @tag_posts, path: tag_path(@tag) %>
   </div>
 </div>
 <% end %>

@@ -198,19 +198,12 @@ $separatorSize: 2px;
     {
       font-weight: bold;
     }
-    .add_tags
+    .tag_list > input
     {
-      .tag_list 
-      {
-        & > input
-        {
-          display: none;
-          margin: 0;
-        }
-      }
+      display: none;
+      margin: 0;
     }
   }
-  
   & > .content
   {
     margin-top: 5px;

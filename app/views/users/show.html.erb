@@ -1,3 +1,3 @@
 <% provide(:title, @user.name) %>
 <%= render @user %>
-<%= render "posts/posts", posts: @stream %>
+<%= render "posts/posts", posts: @stream, path: @user %>

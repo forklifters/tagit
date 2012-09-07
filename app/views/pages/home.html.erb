@@ -1,4 +1,2 @@
 <%= render "posts/fields", post: @post %>
-<div id="stream">
-  <%= render "posts/posts", posts: @stream %>
-</div>
+<%= render "posts/posts", posts: @stream, path: root_path %>
