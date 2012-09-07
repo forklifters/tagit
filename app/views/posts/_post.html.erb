@@ -27,12 +27,13 @@
       <% if signed_in? %>
       <div class="pull-right">
         <div class="pull-left tag_list">
-          <input id="post_<%= post.id %>_tag_list_text_box" class="pull-left" type="text" autocomplete="off" onkeyup="events.tagListTextBoxKeyUp(event, '<%= tags_path %>', <%= post.id %>);" placeholder="<%= t(:tag_list_placeholder_short) %>" />
+          <input id="post_<%= post.id %>_tag_list_text_box" class="pull-left tag_list_textbox" type="text" autocomplete="off" onkeyup="events.tagListTextBoxKeyUp(event, '<%= tags_path %>', <%= post.id %>);" placeholder="<%= t(:tag_list_placeholder_short) %>" />
+          <div class="clear"></div>
         </div>
 
-        <div class="pull-left">
-          <i class="icon-plus" id="post_<%= post.id %>_show_add_tags" onclick="utilities.addTags(this, <%= post.id %>, true);"></i>
-          <%= link_to raw('<i class="icon-plus"></i>'), post_tags_path(post_id: post.id, add_tags: true), method: "post", remote: true, id: "post_#{post.id}_add_tags", style: "display: none", onclick: "utilities.addTags(this, #{post.id}, false);" %>
+        <div class="pull-left add_tags">
+          <i class="icon-plus-sign" id="post_<%= post.id %>_show_add_tags" onclick="utilities.addTags(this, <%= post.id %>, true);"></i>
+          <%= link_to raw('<i class="icon-plus-sign"></i>'), post_tags_path(post_id: post.id, add_tags: true), method: "post", remote: true, id: "post_#{post.id}_add_tags", style: "display: none", onclick: "utilities.addTags(this, #{post.id}, false);" %>
         </div>
 
         <div class="clear"></div>

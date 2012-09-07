@@ -48,7 +48,7 @@ en:
   delete: "Delete"
   _delete: "delete"
   confirm_delete_message: "Are you sure you want to continue?"
-  confirm_untag_all_message: "Are you sure you want to remove the '%{tag}' tag from all your posts? This will not delete the tagged posts."
+  confirm_untag_all_message: "Are you sure you want to remove '%{tag}' from all posts you've tagged?"
   user_deleted_message: "User deleted successfully"
   user_not_deleted_message: "There was an error while trying to delete the user"
   _post: "post"

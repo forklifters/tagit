@@ -3,6 +3,6 @@
     <!-- render "user_tags/follow_form", tag: tag if local_assigns[:show_checkboxes] -->
     <%= link_to tag.name, tag %>
     <%= "(#{tag.count})" if local_assigns[:show_count] %>
-    <%= link_to "×", tag_path(id: tag.slug), method: :delete, confirm: t(:confirm_untag_all_message) % { tag: tag.name } if local_assigns[:show_untag_all] %>
+    <%= link_to raw('<i class="icon-remove"></i>'), tag_path(id: tag.slug), method: :delete, confirm: t(:confirm_untag_all_message) % { tag: tag.name } if local_assigns[:show_untag_all] %>
   </div>
 <% end %>

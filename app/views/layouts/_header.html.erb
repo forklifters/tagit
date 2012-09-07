@@ -2,8 +2,10 @@
   <div class="navbar-inner">
     <div class="container">
       <div id="logo">
-        <img src="/assets/logo-25.png" />
-        <%= link_to t(:base_title), root_path, class: "logo_text" %>
+        <%= link_to root_path do %>
+          <img src="/assets/logo-25.png" />
+          <span class="logo_text"><%= t(:base_title) %></span>
+        <% end %>
       </div>
       
       <nav>

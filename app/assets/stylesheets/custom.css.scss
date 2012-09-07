@@ -119,6 +119,11 @@ a
   @include boxShadow;
 }
 
+i[class*="icon-"]
+{
+  cursor: pointer;
+}
+
 .gravatar
 {
   float: left;
@@ -203,7 +208,12 @@ $separatorSize: 2px;
       display: none;
       margin: 0;
     }
+    .add_tags > a
+    {
+      margin-left: 4px;
+    }
   }
+  
   & > .content
   {
     margin-top: 5px;
@@ -251,4 +261,33 @@ $separatorSize: 2px;
 {
   @extend .tag;
   background: lighten($grayMedium, 5%);
+}
+
+#tag
+{
+  margin-bottom: 5px;
+}
+
+#autocomplete_tags
+{
+  z-index: 1000;
+  position: fixed;
+  background: white;
+  border: 1px solid #aaa;
+  
+  .tag
+  {
+    color: black;
+    cursor: default;
+    background: white;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: small;
+    &:hover
+    {
+      color: white;
+      background: #3298fe;
+    }
+  }
 }

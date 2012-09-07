@@ -16,7 +16,7 @@
       tagListTextBoxKeyUp: tagListTextBoxKeyUp
     }
   });
-    
+  
   $(function() {
     //Enable alert closing
     $('.alert').each(function() {
@@ -28,6 +28,16 @@
     //Attach submit click handlers
     //$(document).on('click.submit', 'a.submit', function() { $(this).closest('form').submit(); return false; });
     //$(document).on('click.submit', 'input.submit', function() { $(this).closest('form').submit(); });
+    
+    //Attach autocompleting of tags
+    $(document).on('click.autocomplete', '.tag_list .tag', function() {
+      var tagListTextBox = $(this).closest('.tag_list').children('.tag_list_textbox');
+      var lastIndexOfDelimiter = tagListTextBox.val().lastIndexOf(',');
+      var separator = (lastIndexOfDelimiter != -1 ? ' ' : '');
+      var previousTags = tagListTextBox.val().substring(0, lastIndexOfDelimiter + 1);
+      tagListTextBox.val(previousTags + separator + $(this).html() + ', ');
+      tagListTextBox.focus();
+    });
     
     setAnchorTarget('_blank');
     embedVideo();
@@ -168,8 +178,8 @@
         
         $('#autocomplete_tags').remove();
         if ($.trim(data).length > 0) {
-          $(sender).after('<div id="autocomplete_tags">' + data + '</div>');
-          $('#autocomplete_tags').append('<div class="clear"></div>');
+          var offset = $(sender).after('<div id="autocomplete_tags">' + data + '</div>').offset();
+          $('#autocomplete_tags').width($(sender).width() + 8).offset({ top: offset.top + 18, left: offset.left })
         }
         
         $(document).one('click.close_autocomplete', ':not(#' + sender.id + ')', function() {

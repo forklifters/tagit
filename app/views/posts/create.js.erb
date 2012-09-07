@@ -8,5 +8,5 @@
 
 //Search
 <% unless @stream.nil? %>
-  $(#stream').html('<%= escape_javascript(render "posts/stream", stream: @stream, path: root_path) %>');
+  $(#stream').html('<%= escape_javascript(render "posts/posts", posts: @stream, path: root_path) %>');
 <% end %>
