@@ -12,7 +12,7 @@ module ApplicationHelper
   end
   
   def pageless(total_pages, url = nil, target = nil, container = nil)
-    opts = { totalPages: total_pages, url: url, loader: "#" + target }
+    opts = { totalPages: total_pages, url: url, loader: "#" + target, loaderImage: "/assets/load.gif" }
     container && opts[:container] ||= container
     javascript_tag("$('##{target}').pageless(#{opts.to_json});")
   end
