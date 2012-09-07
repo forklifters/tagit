@@ -1,6 +1,6 @@
 //Create
 <% unless @post.nil? %>
-  $('#stream').prepend('<%= escape_javascript(render "posts/post", :post => @post) %>');
+  $('#stream').prepend('<%= escape_javascript(render "posts/post", post: @post) %>');
   $('#post_<%= @post.id %>').toggle(false).animate({ height: 'toggle' }, constants.ANIMATION_DURATION);
   $('#new_post').find('input, textarea').val('');
   $('#new_post').find('textarea').focus();
@@ -8,5 +8,5 @@
 
 //Search
 <% unless @stream.nil? %>
-  $('#stream').html('<%= escape_javascript(render "posts/stream", :stream => @stream, :path => root_path) %>');
+  $('#stream').html('<%= escape_javascript(render "posts/stream", stream: @stream, path: root_path) %>');
 <% end %>

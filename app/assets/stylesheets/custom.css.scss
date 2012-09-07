@@ -2,6 +2,21 @@
 
 $grayMediumLight: #eaeaea;
 
+@mixin boxSizing
+{
+  box-sizing: border-box;
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+}
+@mixin boxShadow
+{
+  $shadowSize: 1px;
+  $shadowColor: #111;
+  -moz-box-shadow: 0 0 $shadowSize $shadowSize $shadowColor;
+  -webkit-box-shadow: 0 0 $shadowSize $shadowSize $shadowColor;
+  box-shadow: 0 0 $shadowSize $shadowSize $shadowColor;
+}
+
 html
 {
   overflow-y: scroll;
@@ -102,17 +117,15 @@ a
   }
 }
 
+#fat-menu .gravatar
+{
+  @include boxShadow;
+}
+
 .gravatar
 {
   float: left;
   margin-right: 5px;
-}
-
-@mixin box_sizing
-{
-  box-sizing: border-box;
-  -moz-box-sizing: border-box; 
-  -webkit-box-sizing: border-box; 
 }
 
 input, textarea, select, .uneditable-input
@@ -122,7 +135,7 @@ input, textarea, select, .uneditable-input
   padding: 10px;
   margin-bottom: 4px;
   height: auto;
-  @include box_sizing;
+  @include boxSizing;
   
   &.span6
   {
@@ -158,15 +171,22 @@ input, textarea, select, .uneditable-input
   width: 100%;
   margin-top: 45px;
   background: $grayMediumLight;
-  @include box_sizing;
+  @include boxSizing;
 }
 
+$separatorSize: 2px;
 .user
 {
+  margin-bottom: 10px;
+  
   & > .user_inner
   {
-    margin-bottom: 10px;
-    border-top: 1px solid $grayLighter;
+    border-top: $separatorSize solid $grayLighter;
+    
+    .gravatar
+    {
+      margin-top: -$separatorSize;
+    }
   }
 }
 
@@ -176,7 +196,7 @@ input, textarea, select, .uneditable-input
   
   & > .post_inner
   {
-    border-top: 1px solid $grayLighter;
+    border-top: $separatorSize solid $grayLighter;
     
     & > .timestamp
     {
@@ -192,5 +212,25 @@ input, textarea, select, .uneditable-input
   & > .content
   {
       margin-top: 5px;
+      
+      & > .video
+      {
+        position: relative;
+        max-width: 480px;
+        
+        $play_video_size: 77px;
+        .play_video
+        {
+          background: url(/assets/play-video.png) no-repeat;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          margin-left: -$play_video_size / 2;
+          margin-top: -$play_video_size / 2;
+          width: $play_video_size;
+          height: $play_video_size;
+          opacity: 0.75;
+        }
+      }
   }
 }

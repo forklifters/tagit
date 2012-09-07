@@ -22,9 +22,9 @@ class UsersController < ApplicationController
   
   def index
     query = "#{params[:search]}%"
-    @users = User.where("LOWER(username) LIKE LOWER(?) OR LOWER(name) LIKE LOWER(?)", query, query).order("created_at DESC").paginate(:page => params[:page])
+    @users = User.where("LOWER(username) LIKE LOWER(?) OR LOWER(name) LIKE LOWER(?)", query, query).order("created_at DESC").paginate(page: params[:page])
     if request.xhr?
-     render "users/search", :users => @users
+     render "users/search", users: @users
     end
   end
   
@@ -44,6 +44,21 @@ class UsersController < ApplicationController
     else
       render "users/edit"
     end
+  end
+  
+  def following
+    show_follow(:following)
+  end
+
+  def followers
+    show_follow(:followers)
+  end
+
+  def show_follow(action)
+    @title = t[action.to_s]
+    @user = User.find(params[:id])
+    @users = @user.send(action).paginate(page: params[:page])
+    render "users/show_relationships"
   end
   
   def settings
