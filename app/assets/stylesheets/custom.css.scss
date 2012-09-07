@@ -146,6 +146,11 @@ input, textarea, select, .uneditable-input
   @extend .error;
 }
 
+.alert
+{
+  padding: 8px;
+}
+
 .debug_dump
 {
   clear: both;

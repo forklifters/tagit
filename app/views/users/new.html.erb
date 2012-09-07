@@ -1,10 +1,10 @@
 <% provide(:title, t(:sign_up)) %>
 <div class="row">
-  <div class="span6 offset3">
-    <%= render "shared/error_messages", object: f.object %>
     <%= form_for(@user) do |f| %>
-      <%= render "fields", f: f %>
-      <%= f.submit t(:sign_up), class: "btn btn-large btn-primary" %>
+      <%= render "shared/error_messages", object: f.object %>
+      <div class="span6 offset3">
+        <%= render "users/fields", f: f %>
+        <%= f.submit t(:sign_up), class: "btn btn-large btn-primary" %>
+      </div>
     <% end %>
-  </div>
 </div>

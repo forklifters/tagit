@@ -8,8 +8,8 @@
       
       <nav>
         <ul class="nav pull-right">
-          <li class="<%= active(root_path) %>"><%= link_to t(:home), root_path %></li>
         <% if signed_in? %>
+          <li class="<%= active(root_path) %>"><%= link_to t(:home), root_path %></li>
           <li class="<%= active(users_path) %>"><%= link_to t(:user).pluralize, users_path %></li>
           
           <li class="divider-vertical"></li>

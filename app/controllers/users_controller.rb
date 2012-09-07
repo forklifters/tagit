@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       flash[:success] = t(:welcome_message)
       redirect_to @user
     else
-      render "new"
+      render "users/new"
     end
   end
   
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       sign_in @user
       redirect_to @user
     else
-      render "edit"
+      render "users/edit"
     end
   end
   

@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       redirect_back_or_to user
     else
       flash.now[:error] = t(:invalid_login_message)
-      render "new"
+      render "sessions/new"
     end
   end
 
