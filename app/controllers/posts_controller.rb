@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     end
   end
   
-  def search
+  def search # TODO: Fix paging
     if params[:post][:title].blank? && params[:post][:content].blank? && params[:post][:tag_list].blank? # No search parameters - reset to default
       @stream = current_user.stream.paginate(page: params[:page])
     else

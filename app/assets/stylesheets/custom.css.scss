@@ -291,3 +291,19 @@ $separatorSize: 2px;
     }
   }
 }
+
+.tag_group
+{
+  cursor: pointer;
+  background: #fbfbfb;
+  padding: 2px 4px;
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+  margin: 3px 0;
+}
+
+.tag_group_list > .tag
+{
+  float: none;
+  margin: 0 0 4px 0;
+}

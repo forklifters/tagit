@@ -95,20 +95,21 @@
   }
 
   function attachTogglePost() {
-    $('#filtered_stream').on('click.toggle_post', '.expand_button, .collapse_button', function() {
-      var collapse_post = $(this).hasClass('collapse_button');
-      $(this).attr('href', $(this).attr('href').replace('collapse_post=' + (!collapse_post).toString(), 'collapse_post=' + collapse_post.toString()));
-      $(this).toggleClass('expand_button').toggleClass('collapse_button');
+    $('#stream').on('click.toggle_post', '.icon-chevron-down, .icon-chevron-up', function() {
+      var collapse_post = $(this).hasClass('icon-chevron-up');
+      var link = $(this).closest('a');
+      link.attr('href', link.attr('href').replace('collapse_post=' + (!collapse_post).toString(), 'collapse_post=' + collapse_post.toString()));
+      $(this).toggleClass('icon-chevron-down').toggleClass('icon-chevron-up');
       
-      var post_content = $(this).closest('.post_item').find('.content');
+      var post_content = link.closest('.post').find('.content');
       post_content.children().animate({ height: 'toggle' }, constants.ANIMATION_DURATION);
       post_content.append('<div class="loading_panel"></div>');
     });
   }
   
   function toggleCollapsed(sender, collapsedElement) {
-    $(sender).children('.expand_button, .collapse_button').toggleclass('expand_button').toggleclass('collapse_button');
-    $('#' + collapsedelement).animate({ height: 'toggle' }, constants.ANIMATION_DURATION);
+    $(sender).children('.icon-chevron-down, .icon-chevron-up').toggleClass('icon-chevron-down').toggleClass('icon-chevron-up');
+    $('#' + collapsedElement).animate({ height: 'toggle' }, constants.ANIMATION_DURATION);
   }
   
   function search(sender, path, query) {

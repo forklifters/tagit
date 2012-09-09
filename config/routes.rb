@@ -3,6 +3,7 @@ TagitRails::Application.routes.draw do
   resources :users do
     member do
       get :following, :followers
+      post :settings
     end
   end
   resources :posts
