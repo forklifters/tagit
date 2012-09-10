@@ -180,7 +180,7 @@
         $('#autocomplete_tags').remove();
         if ($.trim(data).length > 0) {
           var offset = $(sender).after('<div id="autocomplete_tags">' + data + '</div>').offset();
-          $('#autocomplete_tags').width($(sender).width() + 8).offset({ top: offset.top + 18, left: offset.left })
+          $('#autocomplete_tags').width($(sender).width() + 8).offset({ top: offset.top + 28, left: offset.left })
         }
         
         $(document).one('click.close_autocomplete', ':not(#' + sender.id + ')', function() {
