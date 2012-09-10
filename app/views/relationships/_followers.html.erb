@@ -1,15 +1,8 @@
-<div class="followers">
-  <a href="<%= followers_user_path(user) %>">
-    <span id="followers_<%= user.username %>" class="user_relationship">
-      <%= pluralize(user.followers.count, t(:_follower)) %>
-    </span>
-  </a>
+<%= link_to pluralize(user.followers.count, t(:_follower)), followers_user_path(user) %>
 
-  <br />
-  
-  <% if user.followers.count > 0 %>
-    <% user.followers.last(8).each do |user| %>
-      <%= link_to gravatar_for(user, size: 38), user, title: user.username %>
-    <% end %>
-  <% end %>
-</div>
+<br />
+
+<% user.followers.last(8).each do |u| %>
+  <%= link_to gravatar_for(u, size: 38), u, title: u.username %>
+<% end %>
+<div class="clear"></div>

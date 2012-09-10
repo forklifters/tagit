@@ -1,3 +1,3 @@
+$('#following_<%= current_user.username %>').html('<%= escape_javascript(render "relationships/following", user: current_user) %>');
+$('#followers_<%= @user.username %>').html('<%= escape_javascript(render "relationships/followers", user: @user) %>');
 $('#follow_form_<%= @user.username %>').html('<%= escape_javascript(render "relationships/follow", user: @user) %>');
-$('#following_<%= current_user.username %>').html('<%= %(#{current_user.following.count} #{t(:_following)}) %>');
-$('#followers_<%= @user.username %>').html('<%= pluralize(@user.followers.count, t(:_follower)) %>');

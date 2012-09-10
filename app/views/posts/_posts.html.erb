@@ -1,1 +1,1 @@
-<div id="stream" class="posts">  <% if posts.any? %>    <%= javascript_include_tag "jquery.pageless.min" %>    <%= render posts %>    <%= pageless(posts.total_pages, path, "stream") %>  <% end %></div>
+<div id="stream" class="posts">  <% if posts.any? %>    <%= javascript_include_tag "jquery.pageless.min" %>    <%= render posts %>    <%= will_paginate posts %>    <%= pageless(posts.total_pages, path, "stream") %>  <% end %></div>

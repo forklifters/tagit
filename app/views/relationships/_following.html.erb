@@ -1,15 +1,8 @@
-<div class="following">
-  <a href="<%= following_user_path(user) %>">
-    <span id="following_<%= user.username %>" class="user_relationship">
-      <%= "#{user.following.count} #{t(:_following)}" %>
-    </span>
-  </a>
+<%= link_to "#{user.following.count} #{t(:_following)}", following_user_path(user) %>
 
-  <br />
-  
-  <% if user.following.count > 0 %>
-    <% user.following.last(8).each do |user| %>
-      <%= link_to gravatar_for(user, size: 38), user, title: user.username %>
-    <% end %>
-  <% end %>
-</div>
+<br />
+
+<% user.following.last(8).each do |u| %>
+  <%= link_to gravatar_for(u, size: 38), u, title: u.username %>
+<% end %>
+<div class="clear"></div>

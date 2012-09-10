@@ -130,18 +130,35 @@ i[class*="icon-"]
   margin-right: 5px;
 }
 
-input, textarea, select, .uneditable-input
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input
 {
-  border: 1px solid #bbb;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 4px;
-  height: auto;
+  height: 28px;
   @include boxSizing;
   &.span6
   {
     width: 468px;
   }
+}
+textarea
+{
+  height: auto;
 }
 
 #error_explanation

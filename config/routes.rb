@@ -6,7 +6,11 @@ TagitRails::Application.routes.draw do
       post :settings
     end
   end
-  resources :posts
+  resources :posts do
+    collection do
+      get :search
+    end
+  end
   resources :tags, :only => [:index, :show, :destroy]
   
   resources :relationships, only: [:create, :destroy]
