@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
     
     flash.discard  # we don't want the flash to appear when we reload the page
   end
+  
+  def not_found
+    raise ActionController::RoutingError.new(t(:not_found_message))
+  end
 end

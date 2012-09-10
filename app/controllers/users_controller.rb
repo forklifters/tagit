@@ -66,14 +66,12 @@ class UsersController < ApplicationController
     if !params[:collapse_post].nil? && !params[:post_id].nil?
       @collapse_post = (params[:collapse_post] == "true")
       post_id_int = params[:post_id].to_i
-      @post = Post.find_by_id(post_id_int)
-      unless @post.nil?
-        current_user.settings.collapsed_posts = [] if current_user.settings.collapsed_posts.nil?
-        if @collapse_post
-          current_user.settings.collapsed_posts += [post_id_int] unless current_user.settings.collapsed_posts.include?(post_id_int)
-        else
-          current_user.settings.collapsed_posts -= [post_id_int]
-        end
+      @post = Post.find_by_id(post_id_int) || not_found
+      current_user.settings.collapsed_posts = [] if current_user.settings.collapsed_posts.nil?
+      if @collapse_post
+        current_user.settings.collapsed_posts += [post_id_int] unless current_user.settings.collapsed_posts.include?(post_id_int)
+      else
+        current_user.settings.collapsed_posts -= [post_id_int]
       end
       respond_with @collapse_post, @post
     end

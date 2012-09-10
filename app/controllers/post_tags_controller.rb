@@ -13,8 +13,7 @@ class PostTagsController < ApplicationController
   end
   
   def destroy
-    post_tag = PostTag.find_by_id(params[:id])
-    flash[:error] = t(:record_not_found_message) and return if post_tag.nil?
+    post_tag = PostTag.find_by_id(params[:id]) || not_found
     @post = post_tag.post
     @tag = post_tag.tag
     post_tag.destroy

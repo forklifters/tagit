@@ -56,16 +56,16 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by_id(params[:id])
+    @post = Post.find_by_id(params[:id]) || not_found
   end
 
   def edit
-    @post = Post.find_by_id(params[:id])
+    @post = Post.find_by_id(params[:id]) || not_found
     respond_with @post
   end
 
   def update
-    @post = Post.find_by_id(params[:id])
+    @post = Post.find_by_id(params[:id]) || not_found
     if @post.update_attributes(title: params[:post][:title], content: params[:post][:content])
       @post.tag_with_list(params[:post][:tag_list], current_user)
       respond_with @post
@@ -88,7 +88,6 @@ class PostsController < ApplicationController
 
 private
   def authorize_edit
-    @post = current_user.posts.find_by_id(params[:id])
-    redirect_to root_path, error: t(:deny_access_message) if @post.nil?
+    @post = current_user.posts.find_by_id(params[:id]) || not_found
   end
 end
