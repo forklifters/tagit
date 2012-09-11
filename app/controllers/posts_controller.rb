@@ -5,10 +5,11 @@ class PostsController < ApplicationController
   respond_to :html, :js
 
   def create
-    if params[:commit] == t(:post_verb) # Create new post
-      @post = current_user.posts.build(title: params[:post][:title], content: params[:post][:content])
+    if params[:commit] == t(:post_verb)
+      post = params[:post]
+      @post = current_user.posts.build(title: post[:title], content: post[:content])
       if @post.save
-        @post.tag_with_list(params[:post][:tag_list], current_user)
+        @post.tag_with_list(post[:tag_list], current_user)
         respond_with @post
       else
         if @post.valid?
@@ -25,12 +26,13 @@ class PostsController < ApplicationController
   end
   
   def search
-    if params[:post][:title].blank? && params[:post][:content].blank? && params[:post][:tag_list].blank? # No search parameters - reset to default
+    post = params[:post] || params
+    if post[:title].blank? && post[:content].blank? && post[:tag_list].blank? # No search parameters - reset to default
       @stream = current_user.stream.paginate(page: params[:page])
     else
-      title = "%#{params[:post][:title]}%";
-      content = "%#{params[:post][:content]}%";
-      tag_names = params[:post][:tag_list].split(/,\s*/).map(&:downcase)
+      title = "%#{post[:title]}%";
+      content = "%#{post[:content]}%";
+      tag_names = post[:tag_list].split(/,\s*/).map(&:downcase)
       if tag_names.blank?
         @stream = current_user.stream
           .where('LOWER("posts".title) LIKE LOWER(?) AND LOWER("posts".content) LIKE LOWER(?)', title, content)
@@ -51,8 +53,11 @@ class PostsController < ApplicationController
         end
       end
     end
-    flash[:error] = t(:no_results_found_message) if @stream.blank?
-    respond_with @stream
+    if params[:post] # TODO
+      respond_with @stream
+    else
+      render partial: "posts/post", collection: @stream
+    end
   end
 
   def show
@@ -66,8 +71,9 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find_by_id(params[:id]) || not_found
-    if @post.update_attributes(title: params[:post][:title], content: params[:post][:content])
-      @post.tag_with_list(params[:post][:tag_list], current_user)
+    post = params[:post]
+    if @post.update_attributes(title: post[:title], content: post[:content])
+      @post.tag_with_list(post[:tag_list], current_user)
       respond_with @post
     else
       if @post.valid?

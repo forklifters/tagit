@@ -10,7 +10,7 @@ class TagsController < ApplicationController
       @tags = Tag.select('name').where('LOWER(name) LIKE LOWER(?) AND id NOT IN (SELECT "post_tags".tag_id FROM "post_tags" WHERE "post_tags".post_id = ?)', name, post_id)
     end
     if request.xhr?
-      render partial: 'tags/autocomplete_tag', collection: @tags.take(5), post_id: params[:post_id]
+      render partial: 'tags/autocomplete_tag', collection: @tags.take(5), post_id: post_id
     end
   end
   
