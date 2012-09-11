@@ -86,3 +86,4 @@ en:
   connect_alternate_account_success_message: "%{provider} credentials were successfully received. Press 'Update' to save the changes."
   disconnect_alternate_account_message: "Disconnect from"
   not_found_message: "The page you are looking for could not be found"
+  no_users_message: "No one has signed up yet"
