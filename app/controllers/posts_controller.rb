@@ -27,9 +27,15 @@ class PostsController < ApplicationController
   
   def search
     post = params[:post] || params
-    if post[:title].blank? && post[:content].blank? && post[:tag_list].blank? # No search parameters - reset to default
+    if post.all? &:blank? # No search parameters - reset to default
       @stream = current_user.stream.paginate(page: params[:page])
+      session.delete(:search_params)
     else
+      if !params[:page]
+        session[:search_params] = post
+      else
+        post = session[:search_params]
+      end
       title = "%#{post[:title]}%";
       content = "%#{post[:content]}%";
       tag_names = post[:tag_list].split(/,\s*/).map(&:downcase)
@@ -53,10 +59,11 @@ class PostsController < ApplicationController
         end
       end
     end
-    if params[:post] # TODO
-      respond_with @stream
-    else
+    
+    if params[:page]
       render partial: "posts/post", collection: @stream
+    else
+      respond_with @stream
     end
   end
 
