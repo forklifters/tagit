@@ -293,19 +293,20 @@ $separatorSize: 2px;
   background: white;
   border: 1px solid #aaa;
   
-  .tag
+  & > .tag
   {
-    color: black;
-    cursor: default;
-    background: white;
-    width: 100%;
+    @include boxSizing;
     margin: 0;
-    padding: 0;
+    padding: 5px 4px;
+    width: 100%;
+    color: black;
+    background: white;
+    cursor: default;
     font-size: small;
     &:hover
     {
       color: white;
-      background: #3298fe;
+      background: #0073cc;
     }
   }
 }
