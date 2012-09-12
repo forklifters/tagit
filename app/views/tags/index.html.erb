@@ -1,6 +1,7 @@
 <% if signed_in? %>
   <%= render "tags/tag_groups", user: current_user %>
 <% else %>
-  <%= render partial: "tags/tag", collection: Tag.all, locals: { show_count: true } %>
-  <div class="clear"></div>
+  <div id="my_tags" class="tag_group_list">
+    <%= render partial: "tags/tag", collection: Tag.all, locals: { show_count: true } %>
+  </div>
 <% end %>

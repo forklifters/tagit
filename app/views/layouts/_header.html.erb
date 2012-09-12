@@ -10,31 +10,34 @@
       
       <nav>
         <ul class="nav pull-right">
-        <% if signed_in? %>
-          <li class="<%= active(root_path) %>"><%= link_to t(:home), root_path %></li>
+          <% if signed_in? %>
+            <li class="<%= active(root_path) %>"><%= link_to t(:home), root_path %></li>
+          <% end %>
+          
           <li class="<%= active(users_path) %>"><%= link_to t(:user).pluralize, users_path %></li>
           <li class="<%= active(tags_path) %>"><%= link_to t(:tag).pluralize, tags_path %></li>
-          
+        
           <li class="divider-vertical"></li>
           
-          <li id="fat-menu" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <%= current_user.name || current_user.username %>
-              <%= gravatar_for current_user, size: 20 %>
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="<%= active(current_user) %>"><%= link_to t(:profile), current_user %></li>
-              <li class="<%= active(edit_user_path(current_user)) %>"><%= link_to t(:setting).pluralize, edit_user_path(current_user) %></li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to t(:sign_out), signout_path, method: :delete %>
-              </li>
-            </ul>
-          </li>
-        <% else %>
-          <li class="<%= active(signin_path) %>"><%= link_to t(:sign_in), signin_path %></li>
-        <% end %>
+          <% if signed_in? %>        
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%= current_user.name || current_user.username %>
+                <%= gravatar_for current_user, size: 20 %>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="<%= active(current_user) %>"><%= link_to t(:profile), current_user %></li>
+                <li class="<%= active(edit_user_path(current_user)) %>"><%= link_to t(:setting).pluralize, edit_user_path(current_user) %></li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to t(:sign_out), signout_path, method: :delete %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li class="<%= active(signin_path) %>"><%= link_to t(:sign_in), signin_path %></li>
+          <% end %>
         </ul>
       </nav>
     </div>

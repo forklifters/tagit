@@ -31,6 +31,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @stream = @user.stream.paginate(page: params[:page])
+    if request.xhr?
+      render partial: "posts/post", collection: @stream
+    end
   end
   
   def edit

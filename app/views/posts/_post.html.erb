@@ -3,12 +3,14 @@
 
   <div class="post_inner">
     <div>
-      <% if signed_in? && current_user?(post.user) %>
-      <% post_tag_names = post.tags_for_author.map(&:name) %>
-      <% post_is_collapsed = (signed_in? && post.is_collapsed_by(current_user)) || post_tag_names.include?("nsfw") || post_tag_names.include?("18+") || post_tag_names.include?("long") || post_tag_names.include?("adult") || post_tag_names.include?("spoiler") %>
-      <%= link_to raw('<i class="icon-chevron-' + (post_is_collapsed ? "down" : "up") + '">&nbsp;&nbsp;&nbsp;</i>'), settings_user_path(current_user, collapse_post: (!post_is_collapsed).to_s, post_id: post.id), class: "pull-right", remote: true, method: :post %>
-      <%= link_to raw('<i class="icon-pencil">&nbsp;&nbsp;&nbsp;</i>'), edit_post_path(post), class: "pull-right", remote: true %>
-      <%= link_to raw('<i class="icon-remove">&nbsp;&nbsp;&nbsp;</i>'), post, class: "pull-right", remote: true, method: :delete, confirm: t(:confirm_delete_message) %>
+      <% if signed_in? %>
+        <% post_tag_names = post.tags_for_author.map(&:name) %>
+          <% if current_user?(post.user) %>
+            <% post_is_collapsed = (post.is_collapsed_by(current_user)) || post_tag_names.include?("nsfw") || post_tag_names.include?("18+") || post_tag_names.include?("long") || post_tag_names.include?("adult") || post_tag_names.include?("spoiler") %>
+            <%= link_to raw('<i class="icon-chevron-' + (post_is_collapsed ? "down" : "up") + '">&nbsp;&nbsp;&nbsp;</i>'), settings_user_path(current_user, collapse_post: (!post_is_collapsed).to_s, post_id: post.id), class: "pull-right", remote: true, method: :post %>
+          <% end %>
+        <%= link_to raw('<i class="icon-pencil">&nbsp;&nbsp;&nbsp;</i>'), edit_post_path(post), class: "pull-right", remote: true %>
+        <%= link_to raw('<i class="icon-remove">&nbsp;&nbsp;&nbsp;</i>'), post, class: "pull-right", remote: true, method: :delete, confirm: t(:confirm_delete_message) %>
       <% end %>
 
       <span>
