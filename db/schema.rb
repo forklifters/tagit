@@ -11,14 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909155832) do
+ActiveRecord::Schema.define(:version => 20120913215902) do
 
   create_table "post_tags", :force => true do |t|
-    t.integer  "post_id"
-    t.integer  "tag_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer "post_id"
+    t.integer "tag_id"
+    t.integer "user_id"
   end
 
   add_index "post_tags", ["post_id", "tag_id", "user_id"], :name => "index_post_tags_on_post_id_and_tag_id_and_user_id", :unique => true
@@ -32,10 +30,8 @@ ActiveRecord::Schema.define(:version => 20120909155832) do
   end
 
   create_table "relationships", :force => true do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer "follower_id"
+    t.integer "followed_id"
   end
 
   add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
