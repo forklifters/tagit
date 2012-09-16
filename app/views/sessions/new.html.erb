@@ -5,7 +5,7 @@
       <%= label_tag t(:email_or_username) %>
       <%= text_field_tag :email %>
 
-      <%= label_tag :password %>
+      <%= label_tag t(:password) %>
       <%= password_field_tag :password %>
       
       <div class="actions">
@@ -13,6 +13,7 @@
       </div>
     <% end %>
 
-    <p><%= t(:not_registered_message) %> <%= link_to t(:sign_up), signup_path %></p>
+    <p class="pull-left"><%= t(:not_registered_message) %> <%= link_to t(:sign_up), signup_path %></p>
+    <p class="pull-right"><%= t(:forgot_password_message) %> <%= link_to t(:reset), new_password_reset_path %></p>
   </div>
 </div>

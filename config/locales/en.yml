@@ -41,7 +41,6 @@ en:
   invalid_login_message: "Invalid login information"
   edit_profile: "Edit profile"
   update_verb: "Update"
-  confirmation: "Confirmation"
   profile_updated_message: "Profile updated successfully"
   deny_access_message: "You don't have access to this page"
   user: "User"
@@ -87,3 +86,13 @@ en:
   disconnect_alternate_account_message: "Disconnect from"
   not_found_message: "The page you are looking for could not be found"
   no_users_message: "No one has signed up yet"
+  forgot_password_message: "Forgot password?"
+  reset_password: "Reset password"
+  send: "Send"
+  password_reset_sent_message: "An email has been sent to %{email} with instructions on how to reset your password"
+  password_reset_expired_message: "Password reset token has expired"
+  password_reset_message: "Your password has been successfully reset"
+  password_reset_subject: "Tag It: Reset Your Password"
+  password_reset_text: "To reset your password, click the URL below:
+%{reset_password_url}
+If you did not request this email, just ignore it and your password will remain the same."

@@ -1,0 +1,22 @@
+<% provide(:title, t(:sign_in)) %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @user, url: password_reset_path(params[:id]) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+      
+      <div class="field">
+        <%= f.label t(:password) %>
+        <%= f.password_field :password %>
+      </div>
+      
+      <div class="field">
+        <%= f.label t(:confirm_password) %>
+        <%= f.password_field :password_confirmation %>
+      </div>
+      
+      <div class="actions">
+        <%= f.submit t(:update_verb), class: "btn btn-large btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

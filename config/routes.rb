@@ -1,5 +1,6 @@
 TagitRails::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
+  resources :password_resets
   resources :users do
     member do
       get :following, :followers
@@ -11,10 +12,10 @@ TagitRails::Application.routes.draw do
       get :search
     end
   end
-  resources :tags, :only => [:index, :show, :destroy]
+  resources :tags, only: [:index, :show, :destroy]
   
   resources :relationships, only: [:create, :destroy]
-  resources :post_tags, :only => [:create, :destroy]
+  resources :post_tags, only: [:create, :destroy]
   
   root to: "pages#home"
   match "/home", to: "pages#home"
